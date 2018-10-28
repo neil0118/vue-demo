@@ -1,7 +1,12 @@
 import LoginComponent from './LoginComponent.vue'
-const Login = {
+import WelcomeComponent from './WelcomeComponent.vue'
+export const Login = {
   install: function (Vue) {
     Vue.component('Login', LoginComponent)
   }
 }
-export default Login
+export const Welcome = {
+  install: function (Vue) {
+    Vue.component('Welcome', WelcomeComponent)
+  }
+}
