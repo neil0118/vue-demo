@@ -7,25 +7,23 @@ var poolData = {
   ClientId: '3uljbl4jc18knbc3qc1a4sei5m'
 }
 var userPool = new AWSCognitoIdentity.CognitoUserPool(poolData)
-var attributeList = []
-var dataEmail = {
-  Name: 'email',
-  Value: 'hysh1991@hotmail.com'
-}
-var attributeEmail = new AWSCognitoIdentity.CognitoUserAttribute(dataEmail)
 
-attributeList.push(attributeEmail)
-
-export function cognitoSignUp () {
-  userPool.signUp('username', 'Pass1234', attributeList, null, function (err, result) {
+export function cognitoSignUp (username, password, email) {
+  var attributeList = []
+  var dataEmail = {
+    Name: 'email',
+    Value: email
+  }
+  var attributeEmail = new AWSCognitoIdentity.CognitoUserAttribute(dataEmail)
+  attributeList.push(attributeEmail)
+  userPool.signUp(username, password, attributeList, null, function (err, result) {
     if (err) {
-      console.log(err)
-      alert(err)
+      alert(err.message)
       return
     }
     var cognitoUser = result.user
-    console.log(cognitoUser)
-    console.log(cognitoUser.getUsername())
+    sessionStorage.setItem('_username', cognitoUser.getUsername())
+    window.location.href = '#/confirm'
   })
 }
 
@@ -42,10 +40,11 @@ export function cognitoSignIn (uname, pass) {
   var cognitoUser = new AWSCognitoIdentity.CognitoUser(userData)
   cognitoUser.authenticateUser(authenticationDetails, {
     onSuccess: function (result) {
-      console.log(result)
+      sessionStorage.setItem('_username', uname)
+      window.location.href = '#/welcome'
     },
     onFailure: function (err) {
-      console.log(err)
+      alert(err.message)
     }
   })
 }
