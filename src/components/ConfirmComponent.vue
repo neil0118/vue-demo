@@ -8,12 +8,11 @@
 <script>
 export default {
   name: 'Confirm',
-  props: {'username': {
-    value: sessionStorage.getItem('_username')
-  }},
+  props: {},
   data () {
     return {
-      msg: 'Confirm component'
+      msg: 'Confirm component',
+      username: sessionStorage.getItem('_username')
     }
   }
 }

@@ -14,6 +14,7 @@
 // eslint-disable-next-line
 import * as AWSCognito from 'amazon-cognito-identity-js'
 import {cognitoSignIn} from './CognitoTools.js'
+sessionStorage.clear()
 export default {
   name: 'Login',
   props: ['username', 'password'],

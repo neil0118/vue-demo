@@ -10,12 +10,11 @@ if (!sessionStorage.getItem('_username')) window.location.href = '#/'
 
 export default {
   name: 'Welcome',
-  props: {'username': {
-    value: sessionStorage.getItem('_username')
-  }},
+  props: {},
   data () {
     return {
-      msg: 'Welcome component'
+      msg: 'Welcome component',
+      username: sessionStorage.getItem('_username')
     }
   },
   methods: {
